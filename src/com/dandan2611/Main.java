@@ -7,7 +7,6 @@ import java.net.URLClassLoader;
 
 import com.dandan2611.modules.Module;
 import com.dandan2611.modules.ModuleList;
-import com.dandan2611.player.Player;
 import com.dandan2611.players.PlayerList;
 
 public class Main {
@@ -16,12 +15,6 @@ public class Main {
 	public static ModuleList mlist = new ModuleList();
 
 	public static void main(String[] args) {
-
-		Player p = new Player("dandan2611", "dandan2611");
-		Player p2 = new Player("lol", "haha");
-
-		list.getPlayers().add(p);
-		list.getPlayers().add(p2);
 
 		File folder = new File("Player/Modules/");
 		if(!folder.exists()) { folder.mkdirs(); }
@@ -63,9 +56,5 @@ public class Main {
 				}			
 			}
 		}
-
-		p.loadModulesFromList();
-		p2.loadModulesFromList();
-
 	}
 }
