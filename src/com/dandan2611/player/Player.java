@@ -65,5 +65,15 @@ public class Player {
 
 		}
 	}
+	
+	// Using name and DisplayName //
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getDisplayName() {
+		return displayname;
+	}
 
 }
