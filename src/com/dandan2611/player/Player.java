@@ -2,24 +2,29 @@ package com.dandan2611.player;
 
 import java.util.HashMap;
 
-import com.dandan2611.Main;
+import com.dandan2611.MyPlayerMain;
 import com.dandan2611.modules.Module;
 
 public class Player {
 
+	// Variables //
+	
 	String name;
 	String displayname;
-
 	String prefix = name + " : ";
 
 	HashMap<String, Module> modules = new HashMap<String, Module>();
 
+	// Main constructor //
+	
 	public Player(String name, String displayname) {
 
 		this.name = name;
 		this.displayname = displayname;
 
 		 prefix = name + " : ";
+		 
+		 System.out.println("MyPlayer : New Player named : " + name);
 		
 	}
 
@@ -29,25 +34,30 @@ public class Player {
 		return modules;
 	}
 
-	public void addModule(String name, Module module) {
+	public void addPlayerModule(String name, Module module) {
 		modules.put(name, module);
+		System.out.println("Adding module : " + module.getConfig().getName() + " to " + name);
 	}
 
-	public void removeModule(String name) {
+	public void removePlayerModule(String name) {
 		modules.remove(name);
+		System.out.println("Removing 1 module from " + name);
 	}
 
 	// Loading Modules //
 
-	public void loadModulesFromMap() {
+	// Custom modules for players //
+	
+	public void loadPlayerModules() {
 
 		if(modules.size() != 0) {
 
 			for(String key : modules.keySet()) {
 
-				System.out.println(prefix + "Loading module " + modules.get(key).name() + "...");
+				System.out.println(prefix + "Loading module " + modules.get(key).getConfig().getName() + "...");
 				System.out.println(" ");
-				modules.get(key).execute();
+				modules.get(key).onDetected();
+				modules.get(key).onExecute();
 
 			}
 		}else{
@@ -55,13 +65,15 @@ public class Player {
 		}
 	}
 	
-	public void loadModulesFromList() {
+	// Modules for all players //
+	
+	public void loadMainModules() {
 
-		for(Module module : Main.mlist.getModules()) {
+		for(Module module : MyPlayerMain.mlist.getModules()) {
 
-			System.out.println(prefix + "Loading module " + module.name() + "...");
+			System.out.println(prefix + "Loading module " + module.getConfig().getName() + "...");
 			System.out.println(" ");
-			module.execute();
+			module.onExecute();
 
 		}
 	}
